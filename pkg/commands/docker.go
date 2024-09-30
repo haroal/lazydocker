@@ -16,9 +16,8 @@ import (
 	cliconfig "github.com/docker/cli/cli/config"
 	ddocker "github.com/docker/cli/cli/context/docker"
 	ctxstore "github.com/docker/cli/cli/context/store"
-	dockerTypes "github.com/docker/docker/api/types"
-	dockerFilters "github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/container"
+	dockerFilters "github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 	"github.com/imdario/mergo"
 	"github.com/jesseduffield/lazydocker/pkg/commands/ssh"
@@ -228,8 +227,7 @@ func (c *DockerCommand) GetContainers(existingContainers []*Container) ([]*Conta
 	if c.Config.ProjectName != "" {
 		filters.Add("label", "com.docker.compose.project="+c.Config.ProjectName)
 	}
-	containers, err := c.Client.ContainerList(context.Background(), dockerTypes.ContainerListOptions{All: true, Filters: filters})
-
+	containers, err := c.Client.ContainerList(context.Background(), container.ListOptions{All: true, Filters: filters})
 	if err != nil {
 		return nil, err
 	}

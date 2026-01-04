@@ -29,7 +29,6 @@ import (
 )
 
 const (
-	APIVersion       = "1.25"
 	dockerHostEnvKey = "DOCKER_HOST"
 )
 
@@ -98,7 +97,7 @@ func NewDockerCommand(log *logrus.Entry, osCommand *OSCommand, tr *i18n.Translat
 		dockerHost = dockerHostFromEnv
 	}
 
-	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithVersion(APIVersion), client.WithHost(dockerHost))
+	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation(), client.WithHost(dockerHost))
 	if err != nil {
 		ogLog.Fatal(err)
 	}
@@ -262,7 +261,11 @@ func (c *DockerCommand) GetContainers(existingContainers []*Container) ([]*Conta
 		if name, ok := ctr.Labels["name"]; ok {
 			newContainer.Name = name
 		} else {
-			newContainer.Name = strings.TrimLeft(ctr.Names[0], "/")
+			if len(ctr.Names) > 0 {
+				newContainer.Name = strings.TrimLeft(ctr.Names[0], "/")
+			} else {
+				newContainer.Name = ctr.ID
+			}
 		}
 		newContainer.ServiceName = ctr.Labels["com.docker.compose.service"]
 		newContainer.ProjectName = ctr.Labels["com.docker.compose.project"]

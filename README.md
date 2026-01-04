@@ -4,20 +4,32 @@
 <br>
 <a href="https://www.warp.dev/?utm_source=github&utm_medium=referral&utm_campaign=lazydocker_20231023">
   <div>
-    <img src="./assets/warp.png" width="230" alt="Warp">
+    <img src="https://github.com/warpdotdev/brand-assets/blob/main/Github/Sponsor/Warp-Github-LG-02.png?raw=true" width="400" alt="Warp">
   </div>
-  <b>Warp is a modern, Rust-based terminal with AI built in so you and your team can build great software, faster.</b>
+  <b>Warp, the intelligent terminal</b>
+  <br>
+  <b>Available for MacOS and Linux</b>
+  <br>
   <div>
     <sup>Visit warp.dev to learn more.</sup>
   </div>
 </a>
 <br>
 <hr>
-<a href="https://www.subble.com">
+<a href="https://tuple.app/lazydocker">
   <div>
-    <img src="https://subble-marketing-portal-media-storage.s3.amazonaws.com/images/subble-black-name-logo.svg" width="230" alt="Subble">
+    <img src="assets/tuple.png" width="400" alt="Tuple">
   </div>
-  <b>I (Jesse) co-founded Subble to save your company time and money by helping you manage its software subscriptions. Check it out!</b>
+  <b>Tuple, the premier screen sharing app for developers on macOS and Windows.</b>
+</a>
+<br>
+<hr>
+<br>
+<a href="https://www.subble.com/jobs/engineer">
+  <div>
+    <img src="assets/subble-job-ad.jpg" width="400" alt="Subble">
+  </div>
+  <b>Click here to learn more</b>
 </a>
 <br>
 
@@ -74,7 +86,7 @@ Memorising docker commands is hard. Memorising aliases is slightly less hard. Ke
 
 ## Requirements
 
-- Docker >= **1.13** (API >= **1.25**)
+- Docker >= **29.0.0** (API >= **1.24**)
 - Docker-Compose >= **1.23.2** (optional)
 
 ## Installation
@@ -229,6 +241,17 @@ If you encounter a compatibility issue with Docker bundled binary, try rebuildin
 the image with the build argument `--build-arg DOCKER_VERSION="v$(docker -v | cut -d" " -f3 | rev | cut -c 2- | rev)"`
 so that the bundled docker binary matches your host docker binary version.
 
+### Manual
+
+You'll need to [install Go](https://golang.org/doc/install)
+
+```
+git clone https://github.com/jesseduffield/lazydocker.git
+cd lazydocker
+go install
+```
+
+You can also use `go run main.go` to compile and run in one go (pun definitely intended)
 
 ## Usage
 
